@@ -1,0 +1,14 @@
+.register-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container{
+    width: 500px;
+    padding: 0 31%;
+}
+
+.register-header{
+    text-align: center;
+}

@@ -1,0 +1,19 @@
+.header{
+    background: rebeccapurple;
+    height: 64px;
+    position: relative;
+}
+
+.btn{
+    position: absolute !important;
+    right: 40px;
+    top: 10px;
+    background: yellow !important;
+}
+
+.btn1{
+    position: absolute !important;
+    right: 40px;
+    top: 10px;
+    background: red !important;
+}

@@ -1,0 +1,19 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-outer{
+    width: 500px;
+    padding: 0 31%;
+}
+
+.register-link{
+    text-align: center;
+    padding: 20px;
+}
+
+.form-header{
+    text-align:center;
+}
