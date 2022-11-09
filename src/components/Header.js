@@ -18,8 +18,13 @@ const Header = () => {
         alert('user logged out!');
     }
 
+    const handleUpdates = () => {
+        navigate('/');
+    }
+
     return (
         <div className="header">
+            {authCtx.isLoggedIn && <Button varient="contained" onClick={handleUpdates}>Update Details</Button>}
             {authCtx.isLoggedIn && <Button varient="contained" className="btn1" onClick={handleLogout}>Logout</Button>}
             {!authCtx.isLoggedIn && <Button varient="contained" className="btn" onClick={handleLogin}>LogIn</Button>}
         </div>

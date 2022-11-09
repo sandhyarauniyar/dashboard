@@ -25,7 +25,7 @@ function Dashboard() {
         getData();
     }, []);
 
-    const headers = ["username", "phoneNumber", "email", "date",]
+    const headers = ["username", "phoneNumber", "email", "date"]
     return (
         <div>
             <Header />

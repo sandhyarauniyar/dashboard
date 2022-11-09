@@ -32,6 +32,34 @@ const RegisterForm = () => {
         setUser({ ...userData, [event.target.name]: event.target.value })
     }
 
+    const updateUser = async () => {
+        const url = `http://localhost:8080/updateDetails`;
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                console.log("details updated");
+                authCtx.login(user.accessToken);
+                alert('User details updated');
+                return user;
+            }
+            else {
+                alert(response.statusText);
+            }
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+    }
+
+
     const Signup = async () => {
         const url = `http://localhost:8080/signup`;
         try {
@@ -64,16 +92,24 @@ const RegisterForm = () => {
         e.preventDefault();
         console.log("submitted");
         console.log(userData);
-        const user = await Signup();
-        console.log(user);
-        setUser({
-            name: '',
-            email: '',
-            username: '',
-            password: '',
-            date: dayjs('2014-08-18T21:11:54'),
-            phoneNumber: ''
-        });
+
+        if (authCtx.isLoggedIn) {
+            const user = await Signup();
+            console.log(user);
+            setUser({
+                name: '',
+                email: '',
+                username: '',
+                password: '',
+                date: dayjs('2014-08-18T21:11:54'),
+                phoneNumber: ''
+            });
+        }
+
+        else {
+            const user = updateUser();
+            console.log(user);
+        }
     }
 
     return (
@@ -89,7 +125,7 @@ const RegisterForm = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DesktopDatePicker name="date" label="Date" inputFormat="MM/DD/YYYY" value={userData.date} onChange={handleDateChange} renderInput={(params) => <TextField {...params} />} required />
                 </LocalizationProvider>
-                <TextField id="outlined-basic" label="Username" variant="outlined" name="username" value={userData.username} onChange={handleChange} required />
+                <TextField id="outlined-basic" label="Username" variant="outlined" name="username" value={userData.username} onChange={handleChange} required disabled={authCtx.isLoggedIn} />
                 <TextField id="outlined-basic" label="Password" variant="outlined" name="password" value={userData.password} onChange={handleChange} required />
                 <Button variant="contained" type="submit">Submit</Button>
             </form>
